@@ -1,0 +1,811 @@
+:root{
+    --navy:#0152a3;
+    --white:#eaeaea;
+    --black:#252a34;
+    --title:35px;
+    --text:19px;
+}
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background:#fff;
+    overflow-x: hidden;
+    font-family: 'Noto Serif', serif; /** Font **/
+}
+
+.go-top{
+    position: fixed;
+    bottom: 100px;
+    right: -100%;
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    border:2px solid #2271b3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    transition: 0.5s;
+}
+.go-top:hover{
+    background: var(--navy);
+    color:#fff;
+    border: 2px solid var(--white);
+}
+.go-top:hover span{color:var(--white);}
+
+.go-top > span{
+   font-size: 30px;
+   color: var(--black);
+}
+
+/** Navegation menu **/
+
+#header{
+    position: relative;
+    width: 100%;
+}
+
+.menu {
+    /** Menu position control **/
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 6.5rem;
+    background: #fff;
+    float:left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999;
+}
+
+.menu .logo-box{margin-left: 20px;}
+.menu .logo-box img{
+    text-decoration: none;
+    width:100px;
+    height: 75px;
+}
+.menu .list-container{margin-right: 20px;}
+.menu .list-container ul{
+    display: flex;
+    width:500px;
+}
+.menu .list-container ul li{
+    float:left;
+    list-style: none;
+    position: relative;
+} 
+
+
+.menu .list-container ul li a{
+    display:block;
+    text-decoration: none;
+    margin: 0px 25px;
+    padding:0rem 0.2rem;
+    line-height: 3rem;
+    border-radius: 24px;
+    font-size: 18px;
+    color: var(--black);
+    transition: 0.3s;
+}
+
+/** Parte del control del sub-menu 
+.menu .list-container .lists li .sub-lists{
+    display:none;
+    position: absolute;
+    border : 0px solid #cccccc;
+    background-color: #ffffff;
+}
+
+.menu .list-container .lists li:hover ul{
+    display:block;
+}
+.menu ul li ul li{
+    width: 100%;
+}
+.menu .list-container .lists li .sub-lists li a{
+    margin: 0px;
+    padding: 1rem 2rem;
+    line-height: unset;
+    white-space: nowrap;
+    font-size: 18px;
+    background: #ffffff;
+    transition: 0.3s;
+}
+.menu .list-container .lists li .sub-lists li a:hover{
+    background: #cccccc;
+    color:#fff;
+}
+/** Parte de control del sub-menu*/
+
+.menu .list-container ul li a.active{
+    background: var(--navy);
+    color:#fff;
+}
+.menu .list-container ul li a:hover{
+    background: var(--navy);  
+    color:#fff;
+}
+
+.btn-menu > .fa-bars{
+    display: none;
+}
+
+@media only screen and (max-width:900px){
+    .btn-menu > .fa-bars{
+        display: block;
+        position:absolute;
+        right: 30px;
+        top: 20px;
+        font-size: 28px;
+        color: var(--black);
+        transition: 0.5s;
+        cursor: pointer;
+    }
+    .btn-menu > .fa-times{color: var(--navy);}
+    .btn-menu > .fa-bars:hover{color:var(--navy);}
+    .menu .logo-box{margin-left: 30px;}
+    .menu .list-container{
+        position: fixed;
+        top:60px;
+        left:-100%;
+        background:#fff;
+        width: 100%;
+        height: calc(100vh - 60px);
+    }
+    .menu .list-container .lists{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border-top:4px solid var(--navy);
+    }
+    .menu .list-container ul li{
+        width: 90%;
+        border-bottom: 2px solid var(--black);
+        display: flex;
+        justify-content: center;
+    }
+    .menu .list-container ul li a{
+        font-size: 20px;
+        text-align: center;
+        padding:12px 0px;
+    }
+    .menu .list-container ul li a.active{
+        background: none;
+        color:var(--navy);
+    }
+    .menu .list-container ul li a:hover{
+        background: none;
+        color:var(--navy);
+    }
+}
+
+/** Navegation Menu **/
+
+/** IMG Header **/
+.img-header{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background:url(../images/header.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+.img-header .welcome{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.img-header .welcome h1{
+    font-size: 50px;
+    color:#fff;
+    font-weight: 200;
+}
+.img-header .welcome hr{
+    width: 400px;
+    height: 2px;
+    background: #fff;
+    border: none;
+    margin-top: 5px;
+}
+.img-header .welcome p{
+    font-size: 20px;
+    color: #fff;
+    margin-top: 20px;
+}
+.img-header .welcome > button{
+    width: 170px;
+    height: 40px;
+    background: var(--navy);
+    border-radius: 24px;
+    border:none;
+    outline: none;
+    font-size: 22px;
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.img-header .welcome > button:hover{
+    background:#0083c2;
+}
+
+@media only screen and (max-width:773px ){
+    .img-header .welcome h1{font-size: 40px;}
+    .img-header .welcome > button{width: 130px; font-size: 20px;}
+}
+@media only screen and (max-width:590px){
+    .img-header .welcome h1{font-size: 30px;}
+    .img-header .welcome hr{width: 100px;}
+    .img-header .welcome p{font-size: 17px;}
+    .img-header .welcome > button{width: 100px; font-size: 17px;}
+}
+
+/** Mision y vision **/
+
+.content {
+    margin-top: 0 auto;
+    position: relative;
+    width: 101%;
+    height: 200px;
+    margin-top:50px;
+    background:var(--navy);
+}
+    
+.izquierda1 {
+    position: absolute;
+    width:40%;
+    height:200px;
+    float: left;
+    margin-left:8%;
+    }
+    
+.derecha1{
+    width:40%;
+    height:200px;
+    float: right;
+    margin-right:8%;
+}
+
+.izquierda1 img{
+    width: 100px; 
+    height: 100px;
+    float:left;
+    position:relative;
+    top: 3em;
+}
+.izquierda1 h2{
+    font-size:25px;
+    font-weight: 400;
+    color:#ffaf02;
+    text-align:center;
+    margin-bottom: 10px;
+    position: relative;
+    top: 1.8em;
+}
+.izquierda1 p{
+    font-size:18px;
+    text-align:center;
+    position: relative;
+    color: #f1ffff;
+    margin: 20px 0px;
+    top: 1.8em;
+    left:1em;
+    font-weight: 400;
+}
+.derecha1 img{
+    width: 120px; 
+    height: 70px;
+    float:left;
+    position:relative;
+    top: 4em;
+}
+.derecha1 h2{
+    font-size:25px;
+    font-weight: 400;
+    color:#ffaf02;
+    text-align:center;
+    margin-bottom: 10px;
+    position: relative;
+    top: 1.8em;
+}
+.derecha1 p{
+    font-size:18px;
+    margin: 20px 0px;
+    font-weight: 400;
+    text-align:center;
+    position: relative;
+    color: #ffffff;
+    top: 1.8em;
+}
+
+/** Mision y vision **/
+
+/** Servicios **/
+.acerca-de{
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.acerca-de .info-container{
+    width: 80%;
+    margin:auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.acerca-de .info-container h1{
+    font-size: 50px;
+    font-weight: 400;
+    color: var(--navy);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.acerca-de .info-container hr{
+    width: 60%;
+    height: 2px;
+    margin:auto;
+    background: var(--navy);
+}
+
+.acerca-de .info-container p{
+    font-size: 18px;
+    color: var(--black);
+    margin-top: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+/** Edition table **/
+
+#horizontal1 {
+    width:100%;
+    height: 380px;
+    margin-bottom:50px;  
+ }
+
+ #horizontal2 {
+    width:100%;
+    height: 380px;
+    margin-bottom: 50px;  
+ }
+
+ .centro {  	
+    width:27%;
+    height: 100%;
+    margin-left: 36.5%;
+    border: 1px solid #C7C7C7;
+    box-shadow: 0px 0px 4px 0px #C7C7C7;
+ }
+
+ .izquierda2 {  	
+    width:27%;  
+    height:100%;
+    border: 1px solid #C7C7C7;
+    box-shadow: 0px 0px 4px 0px #C7C7C7;
+    float: left;
+    margin-left:8%;  
+ }
+
+ .derecha2 {
+    width:27%;  
+    height:100%;
+    border: 1px solid #C7C7C7;
+    box-shadow: 0px 0px 4px 0px #C7C7C7;	
+    float: right;
+    margin-right:8%;  
+ }
+
+.izquierda2 img{
+    width:100%;
+    height:65%;
+    position: relative;
+}
+.derecha2 img{
+    width:100%;
+    height:65%;
+    position: relative;
+}
+.centro img{
+    width:100%;
+    height:65%;
+    position: relative;
+}
+
+.izquierda2 h3{
+    font-size: 18px;
+    font-weight: 100;
+    text-align: center;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.derecha2 h3{
+    font-size: 18px;
+    font-weight: 100;
+    text-align: center;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.centro h3{
+    font-size: 18px;
+    font-weight: 100;
+    text-align: center;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.izquierda2 a{
+    margin-left:29%;
+    transform: translateX(-50%);
+}
+
+.derecha2 a{
+    margin-left:29%;
+    transform: translateX(-50%);
+}
+
+.centro a{
+    margin-left:29%;
+    transform: translateX(-50%);
+}
+
+.personalizado{
+    text-decoration: none;
+    padding: 10px;
+    font-size: 18px;
+    color: #fff;
+    background-color: var(--navy);
+    border-radius: 6px;
+    border: 10px;
+    transition:0.3s;
+}
+
+.personalizado:hover{
+    color:var(--white);
+    background-color:#0083c2;
+}
+
+/**Edition table**/
+
+/** Valores de la empresa **/
+
+/** Grupo de 5 
+
+.panel{
+	padding:0px;
+	background:var(--navy);
+	margin:0px;
+	width:100%;
+    height:200px;
+    margin-top:50px;
+}
+#leftdiv1 {
+	width: 20%;
+	height: 100%;
+	padding: 0;
+	float: left;
+}
+#leftdiv2 {
+	width: 20%;
+	height: 100%;
+	padding: 0;
+	float: left;
+}
+#rightdiv1{
+	width: 20%;
+	height: 100%;
+	padding: 0;
+	float: right;
+}
+#rightdiv2 {
+	width: 20%;
+	height: 100%;
+	padding: 0;
+	float: right;
+}
+#centerdiv {
+	width: 20%;
+	height: 100%;
+	padding: 0;
+	float: right;
+}
+
+/** Imagenes 
+
+#leftdiv1 img{
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    margin-left:25%;
+    margin-top:5%;
+}
+#leftdiv2 img{
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    margin-left:25%;
+    margin-top:5%;
+}
+#rightdiv1 img{
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    margin-left:25%;
+    margin-top:5%;
+}
+#rightdiv2 img{
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    margin-left:25%;
+    margin-top:5%;
+}
+#centerdiv img{
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    margin-left:25%;
+    margin-top:5%;
+}
+#leftdiv1 h2{
+    text-align:center;
+    color: #f1ffff;
+    margin-top:1rem;
+}
+#leftdiv2 h2{
+    text-align:center;
+    color: #f1ffff;
+    margin-top:1rem;
+}
+#rightdiv1 h2{
+    text-align:center;
+    color: #f1ffff;
+    margin-top:1rem;
+}
+#rightdiv2 h2{
+    text-align:center;
+    color: #f1ffff;
+    margin-top:1rem;
+}
+#centerdiv h2{
+    text-align:center;
+    color: #f1ffff;
+    margin-top:1rem;
+}
+ Valores de la Empresa **/
+
+
+/** Cobertura Lima metropolitana **/
+
+.cobertura{
+    width:100%;
+    margin-top:40px;
+}
+
+.cobertura .titulo{
+    margin-left:8%;
+}
+
+.cobertura .titulo h2{
+    font-size: 37px;
+    font-weight: 400;
+    color: var(--black);
+}
+
+.cobertura .titulo hr{
+    width: 44%;
+    height: 2px;
+    background: var(--black);
+}
+
+#box-cobertura {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    margin-top:20px;
+    margin-bottom:50px;
+}
+
+#lista-distrito{
+    height:500px;
+    width:40%;
+    float:left;
+    margin-left:8%;
+}
+
+#lista-distrito li{
+    font-size:18px;
+}
+
+#imagen-promocional{
+    width:40%;
+    height:500px;
+    float:right;
+    margin-right:8%;
+}
+
+#imagen-promocional img{
+    width:350px;
+}
+
+/** Footer **/
+
+footer{
+    width: 100%;
+    height:50%;
+    background: #202020;
+    color: white;   
+}
+
+.container-footer-all{
+    width: 100%;
+    margin: auto;
+    padding: 40px;
+}
+
+.container-body{
+    display: flex;
+    width:100%;
+    margin-left:5%;
+}
+
+.colum1{
+    max-width:230px;
+}
+
+.colum1 .logo-footer img{
+    position: relative;
+    height: 70px;
+    width: 100px;
+    display:block;
+}
+
+.redes-sociales{
+    height:30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.redes-sociales > img{
+    width: 22px;
+    height: 22px;
+    margin: 5px 5px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.colum2{
+    max-width: 230px;
+    margin-left:80px;
+}
+
+.colum2 h1{
+    font-size: 18px;
+    text-align:center;
+}
+
+.colum2 p{
+    font-size: 14px;
+    color: #C7C7C7;
+    margin-top: 20px;
+    text-align:justify;
+}
+
+.colum3{
+    max-width: 300px;
+    margin-left:80px;
+}
+
+.colum3 h1{
+    font-size: 18px;
+}
+
+.row2{
+    margin-top: 10px;
+    display: flex;
+}
+
+.row2 img{
+    width: 23px;
+    height: 23px;
+}
+
+.row2 label{
+    margin-top: 5px;
+    margin-left: 10px;
+    max-width: 140px;
+}
+
+.colum4{
+    max-width: 350px;
+    margin-left:55px;
+}
+
+.colum4 h1{
+    font-size: 18px;
+    display:inline;
+}
+
+.tarjetas{
+    height:30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.tarjetas > img{
+    width: 30px;
+    height: 30px;
+    margin: 5px 5px;
+    cursor: pointer;
+    display:block;
+}
+
+.container-footer{
+    width: 100%;  
+    background: #101010;
+}
+
+.footer{
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;  
+    padding: 20px;
+}
+
+.copyright{
+    color: #C7C7C7;
+}
+
+.copyright a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.information a{
+    text-decoration: none;
+    color: #C7C7C7;
+}
+
+
+@media screen and (max-width: 1100px){
+    
+    .container-body{
+        flex-wrap: wrap;
+    }
+    
+    .colum1{
+        max-width: 100%;
+    }
+    
+    .colum2,
+    .colum3{
+        margin-top: 40px;
+    }
+}
