@@ -24,3 +24,43 @@ La base de datos tiene que crearse manualmente desde el computador con el nombre
 ### Host:
 
 El host es del puerto del computador
+
+## Descripción de los html en la carpeta templates:
+
+### base.html
+
+Aqui lo único que definimos es la base de las plantillas que heredarán en los otros .html
+
+### login.html
+
+Definimos tres inputs donde los dos primeros son el username y password. Al tener la base de datos virgen, lo primero que hacemos es registrarnos en el link colocado en la parte inferior con el nombre "REGISTRARSE". Si insiste en querer logearse sin ningun usuario existente, entonces botará un mensaje error para avisar al usuario.
+
+### register.html
+
+Pedimos la información básica al usuario como su nombre, correo y contraseña para registrarlo en la base de datos. Otro dato es que en Perú para poder identificar a la persona es el DNI ("Documento Nacional de Identificación"). Esto lo usaremos como si fuera su nuestro id. 
+
+### homepage.html
+
+Una vez logeado, el usuario podrá revisar aquí todas sus acciones que puede realizar en la página. Tales como postear un producto, aumentar dinero a su cartera digital y revisar las subastas que se dan en ese momento. También tiene otro botón donde se podrá hacer LOGOUT para cerrar su sesión.
+
+### products.html
+
+Página donde se podrá postear un producto. Para esto se pedira el nombre, precio inicial, características, tiempo de inicio de la subasta en (aaaa-mm-dd) y tiempo de fin subasta (aaaa-mm-dd).
+
+## archivos .js y .css
+
+### user.js
+
+En este javascript lo único que hacemos es pasar mediante un fetch y un metodo POST al servidor los datos obtenidos por los forms. Una vez regresado el jsonResponse, empezamos a comprobar si fue True o False la respuesta del servidor con el fin de ver que condición cumple (registro aceptado o no).
+
+### product.js
+
+En este javascript hacemos el fecth, metodo POST, DELETE al servidor con tal de ver si agrega o quita un producto subido a la pagina. También hacemos la impresión de los datos desde la base de datos.
+
+### login.js
+
+Solo enviamos los datos del formulario al servidor y luego confirmamos si te lograste logear o no.
+
+## app.py
+
+Es el servidor donde se ejecuta toda la parte de la lógica. Primero esta la definición de las Entidades y las Relaciones. Cada uno con sus foreign keys y primary keys correspondientes. Luego la parte de las rutas y métodos que se harán en la aplicación. Finalmente los render template de las páginas que se usaran las plantillas heredadas
