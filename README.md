@@ -1,10 +1,11 @@
 # ProyectoWEB
 
-## Página de subasta Integrates:
+## Página de subasta
+
+### Integrabtes:
 
 - Salvador Eliot Hilares Barrios
-- Diego Antonio Escajadillo Guerrero
-- Alexander Baldeon Medrano
+
 ### Descripción del proyecto:
 
 La siguiente página de subasta contiene un login y register para el usuario y para que suban,editen y eliminen sus productos. Está conectado a una base de datos en postgreSQL. El nombre del database es "subasta" y contiene dos tablas con nombres Usuario y Producto. La tabla Usuario tiene cuatro atributos y estas son id, name, password y email. En cambio, la tabla Producto tiene por atributos el id, name, features y price.
