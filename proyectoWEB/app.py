@@ -1,5 +1,4 @@
 from operator import sub
-from typing import Protocol
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -10,7 +9,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:syncmaster750s@localhost:5432/subasta'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-#migrate = Migrate(app, db)
+migrate = Migrate(app, db)
 
 # AQUI VAN LAS ENTIDADES
 class Usuario(db.Model):
@@ -54,7 +53,7 @@ class Participar(db.Model):
     dni_usuario = db.Column(db.Integer, db.ForeignKey('usuario.dni'),primary_key=True)
     id_subasta = db.Column(db.Integer, db.ForeignKey('subasta.id'),primary_key=True)
 
-db.create_all()
+#db.create_all()
 
 #REGISTRAR USUARIOS
 @app.route('/users/create', methods = ['POST'])
@@ -122,10 +121,11 @@ def publish_product():
         features = request.get_json()['features']
         dni = request.get_json()['DNI']
 
-        producto = Producto(nombre = name, caracteristicas = features, precio_inicial = int(price), subasta_id = 1, dni_usuario = int(dni))
+        producto = Producto(nombre = name, caracteristicas = features, precio_inicial = float(price), subasta_id = subasta.id, dni_usuario = int(dni))
         db.session.add(producto)
         db.session.commit()
-        
+        response['dni'] = producto.dni_usuario
+
     except:
         error = True
         db.session.rollback()
@@ -143,17 +143,43 @@ def delete_producto_by_id(product_id):
     response = {}
     error = False
     try:
-        producto = Producto.query.get(product_id)
+        producto = db.session.query(Producto).filter(Producto.id == product_id).first()
+        subasta = db.session.query(Subasta).filter(Subasta.id == producto.id).first()
         if producto is None:
-            response['error_message'] = 'product_id does not exists in the subasta'
+            response['error_message'] = 'product_id does not exists in the database'
         db.session.delete(producto)
+        db.session.delete(subasta)
         db.session.commit()
     except:
         error = True
         db.session.rollback()
+        print(sys.exc_info())
     finally:
         db.session.close()
     response['success'] = error
+    return jsonify(response)
+
+#RECARGAR SALDO
+@app.route('/recharge/wallet', methods=['PUT'])
+def recharge_wallet():
+    response = {}
+    error = False
+    try:
+        dni = request.get_json()['DNI']
+        price = request.get_json()['price']
+        user = db.session.query(Usuario).filter(Usuario.dni == dni).first()
+        user.dinero = user.dinero + float(price)
+        response['error_message'] = 'RECARGA EXITOSA'
+        db.session.commit()
+    except:
+        error = True
+        db.session.rollback()
+        print(sys.exc_info())
+    finally:
+        db.session.close()
+    if error:
+        response['error_message'] = 'No se pudo ingresar a la base de datos'
+    response['error'] = error
     return jsonify(response)
 
 '''
@@ -185,11 +211,20 @@ def register():
 
 @app.route('/homepage/<dni>')
 def homepage(dni):
-    return render_template('homepage.html',data=Usuario.query.filter_by(dni=dni).first())
+    my_products = db.session.query(Producto).filter(Producto.dni_usuario==dni)
+    return render_template('homepage.html',data=Usuario.query.filter_by(dni=dni).first(), data2=my_products, data3=Subasta.query.all())
 
 @app.route('/products/<dni>')
 def products(dni):
-    return render_template('products.html',data=Producto.query.all(),data2=Usuario.query.filter_by(dni=dni).first())
+    return render_template('products.html',data2=Usuario.query.filter_by(dni=dni).first())
+
+@app.route('/subasta/<dni>')
+def subasta(dni):
+    return render_template("subasta.html",data=Usuario.query.filter_by(dni=dni).first(), data2=Producto.query.all(), data3=Subasta.query.all())
+
+@app.route('/recharge/<dni>')
+def recharge(dni):
+    return render_template('recharge.html',data=Usuario.query.filter_by(dni=dni).first())
 
 if __name__ == '__main__':
     app.run(port=5003, debug=True)

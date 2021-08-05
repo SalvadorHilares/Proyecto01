@@ -18,19 +18,9 @@ document.getElementById("public_product").onsubmit = function(e){
     }).then(function(jsonResponse){
         console.log(jsonResponse)
         if(jsonResponse['error'] === false){
-            const liItem = document.createElement('li')
-            const  buttonItem = document.createElement('button')
-            buttonItem.innerHTML = "&cross;"
-            buttonItem.className = "delete-button"
-            buttonItem.setAttribute('data-id',jsonResponse.id)
-            liItem.innerHTML = jsonResponse['name'] + ' ' + jsonResponse['price'] + ' ' + jsonResponse['features']
-            liItem.appendChild(buttonItem)
-            document.getElementById("products").appendChild(liItem)
-            document.getElementById('name').value = ''
-            document.getElementById('price').value = ''
-            document.getElementById('features').value = ''
+            var dni = jsonResponse['dni'].toString()
+            window.location.replace('/homepage/'+dni)
             document.getElementById("error").className='hidden'
-            window.location.reload(true)
         }else{
             document.getElementById("error").className=''
             document.getElementById("error").innerHTML = jsonResponse['error_message']
