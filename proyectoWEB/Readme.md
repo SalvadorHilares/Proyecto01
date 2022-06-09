@@ -1,8 +1,6 @@
 Página de subasta
 Integrates:
 - Salvador Eliot Hilares Barrios
-- Diego Antonio Escajadillo Guerrero   
-- Alexander Baldeon Medrano
 
 Descripción del proyecto:
 
